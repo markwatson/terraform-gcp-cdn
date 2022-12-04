@@ -47,3 +47,9 @@ variable "client_ttl" {
   type        = number
   default     = 3600
 }
+
+variable "signed_url_cache_max_age_sec" {
+  description = "Specifies the maximum allowed TTL for signed URLs served by this origin. See: https://cloud.google.com/cdn/docs/private-content"
+  type        = number
+  default     = 3600
+}

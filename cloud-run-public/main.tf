@@ -31,6 +31,7 @@ resource "google_compute_backend_service" "default" {
       default_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.default_ttl : null
       max_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.max_ttl : null
       client_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.client_ttl : null
+      signed_url_cache_max_age_sec = var.signed_url_cache_max_age_sec
     }
   }
   connection_draining_timeout_sec  = 300
