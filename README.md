@@ -78,7 +78,7 @@ locals {
 
 // The CDN
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn/cdn"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
   providers = {
     google = google.gcentral
   }
@@ -93,7 +93,7 @@ module "main-cdn" {
 
 // Static site
 module "example-backend" {
-  source = "github.com/markwatson/terraform-gcp-cdn/static-site"
+  source = "github.com/markwatson/terraform-gcp-cdn//static-site?ref=v0.1.0"
   providers = {
     google = google.gcentral
   }
@@ -127,7 +127,7 @@ locals {
 
 // The CDN
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn/cdn"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
   providers = {
     google = google.gcentral
   }
@@ -142,7 +142,7 @@ module "main-cdn" {
 
 // CloudRun site
 module "example-backend" {
-  source = "github.com/markwatson/terraform-gcp-cdn/cloud-run-public"
+  source = "github.com/markwatson/terraform-gcp-cdn//cloud-run-public?ref=v0.1.0"
 
   providers = {
     google = google.gcentral
@@ -161,7 +161,7 @@ To put multiple sites behind the CDN, you can just pass multiple URL maps to the
 
 ```hcl
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn/cdn"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
   providers = {
     google = google.gcentral
   }
