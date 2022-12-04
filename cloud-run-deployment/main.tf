@@ -80,7 +80,15 @@ resource "google_cloudbuild_trigger" "filename-trigger" {
 data "google_project" "project" {}
 
 resource "google_project_iam_member" "cloudbuild_cloudrun_deployer" {
+  count = var.build_trigger ? 1 : 0
   project = data.google_project.project.number
   role    = "roles/run.developer"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "cloudbuild_cloudrun_deployer" {
+  count = var.build_trigger ? 1 : 0
+  project = data.google_project.project.number
+  role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
 }
