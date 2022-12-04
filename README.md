@@ -140,7 +140,7 @@ module "main-cdn" {
 
 // CloudRun site
 module "example-backend" {
-  source = "github.com/markwatson/terraform-gcp-cdn/cloud-run-backend"
+  source = "github.com/markwatson/terraform-gcp-cdn/cloud-run-public"
 
   providers = {
     google = google.gcentral
