@@ -1,5 +1,7 @@
 # Overview
 
+> **NOTE:** This is a work in progress. The API is not stable and may change at any time. Additionally, it was originally built around a year ago, and in the meantime Google decided to deprecate the load balancing model this is using (of course).
+
 This repository contains Google Cloud Platform CDN Terraform modules. Google provides a number
 of [official Terraform modules](https://registry.terraform.io/search/modules?namespace=GoogleCloudPlatform), which are probably better suited to your needs than these modules. I created these because I wanted a simple way to host websites that scale with traffic, but didn't want
 to string together new TF resources for every project.
