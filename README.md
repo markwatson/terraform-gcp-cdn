@@ -9,8 +9,9 @@ to string together new TF resources for every project.
 # Modules
 
 - [cdn](cdn): Module for creating a CDN.
-- [cloud-run-public](cloud-run-public): Module for creating a Cloud Run service with a public endpoint.
+- [cloud-run-public](cloud-run-public): Module for creating a Cloud Run backend with a public endpoint.
 - [static-site](static-site): Module for creating a static website.
+- [cloud-run-deployment](cloud-run-deployment): Module for creating a Cloud Run resource & deployment.
 
 Usually usage will involve creating a CDN, and then using either the static-site or cloud-run-public modules to create a backend for the CDN. If you want to serve the site via Docker, then use Cloud Run. If you instead want to compile the HTML statically and upload to a bucket, then use the static-site module.
 
@@ -108,7 +109,7 @@ module "example-backend" {
 
 ## Single Cloud Run Site
 
-The example below shows how to configure a CloudRun site that sits behind the CDN. While the CloudRun site is configured, it does not configure deployments.
+The example below shows how to configure a CloudRun backend that sits behind the CDN.
 
 ```hcl
 // Configure the Google Cloud provider
@@ -153,7 +154,14 @@ module "example-backend" {
   name = "example-backend"
   cloudrun_name = "example-backend-api"
 }
+
+// If your cloudrun is not already setup, you can do so with the cloud-run-deployment module.
+// TODO: document
+
 ```
+
+For CloudRun deployment, you will need to connect your GitHub to your Google account and copy
+the example [cloudbuild.yaml](cloud-run-deployment/cloudbuild.example.yaml) to your repository.
 
 ## Multiple Sites
 
