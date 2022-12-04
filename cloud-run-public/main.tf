@@ -28,9 +28,9 @@ resource "google_compute_backend_service" "default" {
     for_each = var.enable_cdn == true ? toset([1]) : toset([])
     content {
       cache_mode = var.cache_mode
-      default_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.default_ttl : null
-      max_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.max_ttl : null
-      client_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.client_ttl : null
+      default_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.default_ttl : 0
+      max_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.max_ttl : 0
+      client_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.client_ttl : 0
       signed_url_cache_max_age_sec = var.signed_url_cache_max_age_sec
     }
   }
