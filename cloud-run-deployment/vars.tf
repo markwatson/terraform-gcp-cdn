@@ -1,5 +1,5 @@
 variable "name" {
-    decription = "The name of the cloud run service"
+    description = "The name of the cloud run service"
     type = string
 }
 
