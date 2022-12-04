@@ -86,7 +86,7 @@ resource "google_project_iam_member" "cloudbuild_cloudrun_deployer" {
   member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
 }
 
-resource "google_project_iam_member" "cloudbuild_cloudrun_deployer" {
+resource "google_project_iam_member" "cloudbuild_iam_deployer" {
   count = var.build_trigger ? 1 : 0
   project = data.google_project.project.number
   role    = "roles/iam.serviceAccountUser"
