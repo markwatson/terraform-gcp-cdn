@@ -79,7 +79,7 @@ locals {
 
 // The CDN
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.2.0"
   providers = {
     google = google.gcentral
   }
@@ -94,7 +94,7 @@ module "main-cdn" {
 
 // Static site
 module "example-backend" {
-  source = "github.com/markwatson/terraform-gcp-cdn//static-site?ref=v0.1.0"
+  source = "github.com/markwatson/terraform-gcp-cdn//static-site?ref=v0.2.0"
   providers = {
     google = google.gcentral
   }
@@ -128,7 +128,7 @@ locals {
 
 // The CDN
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.2.0"
   providers = {
     google = google.gcentral
   }
@@ -143,7 +143,7 @@ module "main-cdn" {
 
 // CloudRun site
 module "example-backend" {
-  source = "github.com/markwatson/terraform-gcp-cdn//cloud-run-public?ref=v0.1.0"
+  source = "github.com/markwatson/terraform-gcp-cdn//cloud-run-public?ref=v0.2.0"
 
   providers = {
     google = google.gcentral
@@ -152,12 +152,27 @@ module "example-backend" {
   project = local.project
   region = local.region
   name = "example-backend"
-  cloudrun_name = "example-backend-api"
+  cloudrun_name = "example-backend-api" # or module.example-backend-deployment.cloudrun_name
 }
 
 // If your cloudrun is not already setup, you can do so with the cloud-run-deployment module.
-// TODO: document
+module "example-backend-deployment" {
+  source = "github.com/markwatson/terraform-gcp-cdn//cloud-run-deployment?ref=v0.2.0"
 
+  providers = {
+    google = google.gcentral
+  }
+
+  name = "example-backend-api"
+  location = local.region
+  project = local.project
+  build_trigger = true
+  build_trigger_options = {
+    branch = "main"
+    github_owner = "username"
+    github_name = "reponame"
+  }
+}
 ```
 
 For CloudRun deployment, you will need to connect your GitHub to your Google account and copy
@@ -169,7 +184,7 @@ To put multiple sites behind the CDN, you can just pass multiple URL maps to the
 
 ```hcl
 module "main-cdn" {
-  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.1.0"
+  source = "github.com/markwatson/terraform-gcp-cdn//cdn?ref=v0.2.0"
   providers = {
     google = google.gcentral
   }
