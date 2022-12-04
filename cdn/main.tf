@@ -14,6 +14,12 @@ resource "google_compute_global_address" "default" {
   ip_version   = "IPV4"
   address_type = "EXTERNAL"
 }
+resource "google_compute_global_address" "ipv6" {
+  project      = var.project
+  name         = "${var.name}-address-ipv6"
+  ip_version   = "IPV6"
+  address_type = "EXTERNAL"
+}
 
 # Create HTTP Rules
 resource "google_compute_target_http_proxy" "http" {
@@ -43,6 +49,17 @@ resource "google_compute_global_forwarding_rule" "http" {
 
   labels = var.labels
 }
+resource "google_compute_global_forwarding_rule" "http_ipv6" {
+  project    = var.project
+  name       = "${var.name}-http-rule-ipv6"
+  target     = google_compute_target_http_proxy.http.self_link
+  ip_address = google_compute_global_address.ipv6.address
+  port_range = "80"
+
+  depends_on = [google_compute_global_address.ipv6]
+
+  labels = var.labels
+}
 
 
 # Create HTTPS Rules
@@ -53,6 +70,16 @@ resource "google_compute_global_forwarding_rule" "https" {
   ip_address = google_compute_global_address.default.address
   port_range = "443"
   depends_on = [google_compute_global_address.default]
+
+  labels = var.labels
+}
+resource "google_compute_global_forwarding_rule" "https-ipv6" {
+  project    = var.project
+  name       = "${var.name}-https-rule-ipv6"
+  target     = google_compute_target_https_proxy.default.self_link
+  ip_address = google_compute_global_address.ipv6.address
+  port_range = "443"
+  depends_on = [google_compute_global_address.ipv6]
 
   labels = var.labels
 }
