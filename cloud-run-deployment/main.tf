@@ -79,6 +79,7 @@ resource "google_cloudbuild_trigger" "filename-trigger" {
 
 data "google_project" "project" {}
 
+// TODO: Figure out exact permissions needed.
 resource "google_project_iam_member" "cloudbuild_cloudrun_deployer" {
   count = var.build_trigger ? 1 : 0
   project = data.google_project.project.number
