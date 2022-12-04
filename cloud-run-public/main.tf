@@ -24,6 +24,15 @@ resource "google_compute_backend_service" "default" {
   timeout_sec = 30
 
   enable_cdn  = var.enable_cdn
+  dynamic "cdn_policy" {
+    for_each = var.enable_cdn == true ? toset([1]) : toset([])
+    content {
+      cache_mode = var.cache_mode
+      default_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.default_ttl : null
+      max_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.max_ttl : null
+      client_ttl = var.cache_mode != "USE_ORIGIN_HEADERS" ? var.client_ttl : null
+    }
+  }
   connection_draining_timeout_sec  = 300
 
   log_config {
