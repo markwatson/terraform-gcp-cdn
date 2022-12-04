@@ -23,9 +23,3 @@ variable "enable_cdn" {
   type        = bool
   default     = false
 }
-
-variable "cdn_policy" {
-  description = "CDN policy for the backend service. See: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service#nested_cdn_policy"
-  type        = map(string)
-  default     = {}
-}

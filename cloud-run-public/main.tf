@@ -24,7 +24,6 @@ resource "google_compute_backend_service" "default" {
   timeout_sec = 30
 
   enable_cdn  = var.enable_cdn
-  cdn_policy  = var.cdn_policy
   connection_draining_timeout_sec  = 300
 
   log_config {
