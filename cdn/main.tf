@@ -73,7 +73,7 @@ resource "google_compute_global_forwarding_rule" "https" {
 
   labels = var.labels
 }
-resource "google_compute_global_forwarding_rule" "https-ipv6" {
+resource "google_compute_global_forwarding_rule" "https_ipv6" {
   project    = var.project
   name       = "${var.name}-https-rule-ipv6"
   target     = google_compute_target_https_proxy.default.self_link
